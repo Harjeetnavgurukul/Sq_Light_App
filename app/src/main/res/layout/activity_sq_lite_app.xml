@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SqLiteApp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/Img"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/Img"
+        android:hint="Name"
+        android:id="@+id/ediName"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ediName"
+        android:hint="Age"
+        android:id="@+id/edtAge"
+        />
+
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/edtAge"
+        android:hint="Phone"
+        android:id="@+id/ediPhone"
+        />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Save Record"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/ediPhone"
+        android:id="@+id/btn"
+        />
+
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Record List"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/btn"
+        android:id="@+id/btn1"
+        />
+
+</RelativeLayout>
