@@ -27,13 +27,13 @@ public class SQliteHelper extends SQLiteOpenHelper {
         statement.bindString(2, age);
         statement.bindString(3, phone);
         statement.bindBlob(4, image);
-        statement.execute();
+        statement.executeInsert();
 
     }
 
     public void updateData (String name, String age, String phone, byte[] image, int id) {
         SQLiteDatabase database = getWritableDatabase();
-        String sql = "UPDATE RECORD SET name = ?, age = ?, phone = ? WHERE id = ?";
+        String sql = "UPDATE RECORD SET name=?, age=?, phone=? WHERE id=?";
         SQLiteStatement statement = database.compileStatement(sql);
         statement.bindString(1, name);
         statement.bindString(2, age);

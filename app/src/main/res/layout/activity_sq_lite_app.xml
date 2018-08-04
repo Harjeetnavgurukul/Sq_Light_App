@@ -8,8 +8,8 @@
     tools:context=".SqLiteApp">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/ic_account_circle_black_24dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/Img"
@@ -48,7 +48,7 @@
         android:hint="Save Record"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/ediPhone"
-        android:id="@+id/btn"
+        android:id="@+id/Button"
         />
 
     <Button
@@ -56,8 +56,8 @@
         android:layout_height="wrap_content"
         android:hint="Record List"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/btn"
-        android:id="@+id/btn1"
+        android:layout_below="@id/Button"
+        android:id="@+id/Button1"
         />
 
 </RelativeLayout>

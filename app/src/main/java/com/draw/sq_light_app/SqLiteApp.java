@@ -1,6 +1,7 @@
 package com.draw.sq_light_app;
 
-import android.Manifest;
+import
+        android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,8 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageView;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 
@@ -31,7 +31,8 @@ public class SqLiteApp extends AppCompatActivity {
     ImageView imageView;
     Button btn, btn1;
 
-    final int REQUEST_CODE_GALLERY = 999;
+    final int REQUEST_CODE_GALLERY = 1;
+    private Uri ImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +43,8 @@ public class SqLiteApp extends AppCompatActivity {
         edit1 = findViewById(R.id.ediPhone);
         edit2 = findViewById(R.id.edtAge);
         imageView = findViewById(R.id.Img);
-        btn = findViewById(R.id.btn);
-        btn1 = findViewById(R.id.btn1);
+        btn = findViewById(R.id.Button);
+        btn1 = findViewById(R.id.Button1);
 
         mySQliteHelper = new SQliteHelper(this, "RECORD.SQlite", null, 1);
         mySQliteHelper.quaryData("CREATE TABLE IF NOT EXISTS RECORD (id INTEGER PRIMARY KEY AUTOINCREMENT, name VARCHAR, age VARCHAR, phone VARCHAR, image BLOB)");
@@ -53,14 +54,12 @@ public class SqLiteApp extends AppCompatActivity {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityCompat.requestPermissions(SqLiteApp.this,
-                new String[]{
-                        Manifest.permission.READ_EXTERNAL_STORAGE
-                },REQUEST_CODE_GALLERY
+               Intent intent = new Intent();
+               intent.setType("image/*");
+               intent.setAction(Intent.ACTION_GET_CONTENT);
+               startActivityForResult(intent,REQUEST_CODE_GALLERY);
 
-                );
-
-            }
+               }
         });
 
 
@@ -92,7 +91,7 @@ public class SqLiteApp extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Code For Latter....
+                startActivity(new Intent(SqLiteApp.this, RecordListActivity.class));
             }
         });
     }
@@ -123,26 +122,31 @@ public class SqLiteApp extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if (requestCode == REQUEST_CODE_GALLERY &&  requestCode == RESULT_OK){
-            Uri uri = data.getData();
-            CropImage.activity(uri).setGuidelines(CropImageView.Guidelines.ON)
-                    .setAspectRatio(1,1)
-                    .start(this);
-
-        }
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-
-            if (requestCode == RESULT_OK){
-                Uri resultUri = result.getUri();
-                imageView.setImageURI(resultUri);
-
-            }
-            else {
-                Exception error = result.getError();
-            }
-        }
+//        if (requestCode == REQUEST_CODE_GALLERY &&  requestCode == RESULT_OK){
+//            Uri uri = data.getData();
+//            CropImage.activity(uri)
+//                    .setGuidelines(CropImageView.Guidelines.ON)
+//                    .setAspectRatio(1,1)
+//                    .start(this);
+//
+//        }
+//        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE){
+//            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+//
+//            if (requestCode == RESULT_OK){
+//                Uri resultUri = result.getUri();
+//                imageView.setImageURI(resultUri);
+//
+//            }
+//            else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+//                Exception error = result.getError();
+//            }
+//        }
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK && data != null & data.getData() != null) {
+            ImageUri = data.getData();
+            Picasso.get().load(ImageUri).into(imageView);
+        }
 
     }
 }
